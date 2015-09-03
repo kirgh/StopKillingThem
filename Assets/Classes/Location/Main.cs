@@ -11,7 +11,8 @@ public class Main : MonoBehaviour {
 	
 
 
-	void Start () {
+	void Start ()
+	{
 		TileSize = 2;
 		SourceGraphicsScale = TileSize / 0.4f;
 		Tiles = new LocationTiles (UnityEngine.Random.Range(7, 12), UnityEngine.Random.Range(5, 10));
@@ -19,6 +20,11 @@ public class Main : MonoBehaviour {
 		LocationHeightInMeters = Tiles.Height * TileSize;
 		gameObject.AddComponent<LocationGeneration.LocationGenerator> ();
 		gameObject.AddComponent<CameraController> ();
+	}
+
+	public void Restart()
+	{
+		Application.LoadLevel (Application.loadedLevel);
 	}
 	
 }
