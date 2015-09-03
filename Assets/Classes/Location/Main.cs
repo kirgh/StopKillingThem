@@ -15,7 +15,7 @@ public class Main : MonoBehaviour {
 		Tiles = new LocationTiles (12, 10);
 		LocationWidthInMeters = Tiles.Width * TileSize;
 		LocationHeightInMeters = Tiles.Height * TileSize;
-		gameObject.AddComponent<LocationGenerator> ();
+		gameObject.AddComponent<LocationGeneration.LocationGenerator> ();
 		gameObject.AddComponent<CameraController> ();
 	}
 	

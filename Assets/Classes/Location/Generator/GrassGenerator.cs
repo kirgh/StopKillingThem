@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+namespace LocationGeneration{
 public class GrassGenerator
 {
 	public GrassGenerator ()
@@ -23,4 +24,5 @@ public class GrassGenerator
 
 		return grass;
 	}
+}
 }

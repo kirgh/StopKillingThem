@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
+namespace LocationGeneration{
 public class RoadGenerator
 {
 
@@ -42,12 +43,8 @@ public class RoadGenerator
 			int maxX = vertical ? (startX + roadWidth) : main.Tiles.Width;
 			int minY = vertical ? 0 : startY;
 			int maxY = vertical ? main.Tiles.Height : (startY + roadWidth);
-
-			for(int x = minX; x < maxX  ; x++){
-				for(int y = minY; y < maxY  ; y++){
-					main.Tiles.Set(x, y, TileType.ROAD);
-				}
-			}
+			
+			main.Tiles.SetRect(minX, minY, maxX - minX, maxY - minY, TileType.Road, false);
 		}
 
 		CreateGrassToRoadBorders (main);
@@ -177,7 +174,7 @@ public class RoadGenerator
 
 		for(int x= 0; x < main.Tiles.Width; x++){
 			for(int y= 0; y < main.Tiles.Height; y++){
-				if(main.Tiles.Get(x, y) != TileType.ROAD){
+				if(main.Tiles.Get(x, y) != TileType.Road){
 					continue;
 				}
 				foreach(Border border in Border.AllBorders){
@@ -188,7 +185,7 @@ public class RoadGenerator
 							needBorder = false;
 							break;
 						}
-						if((main.Tiles.Get(x + condition.xDelta, y + condition.yDelta) == TileType.ROAD) != condition.shouldBeRoad){
+						if((main.Tiles.Get(x + condition.xDelta, y + condition.yDelta) == TileType.Road) != condition.shouldBeRoad){
 							needBorder = false;
 							break;
 						}
@@ -211,4 +208,5 @@ public class RoadGenerator
 		}
 	}
 
+}
 }
