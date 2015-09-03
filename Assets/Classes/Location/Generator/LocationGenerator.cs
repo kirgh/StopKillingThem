@@ -29,7 +29,10 @@ public class LocationGenerator : MonoBehaviour {
 			maxHouseHeight = 3
 		}.CreateHouses (main);
 
-		//Trees, statues, etc
+		new DecorGenerator{
+			minCount = 2,
+			maxCount = 10
+		}.CreateDecor (main);
 	}
 }
 }

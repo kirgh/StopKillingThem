@@ -38,7 +38,7 @@ namespace LocationGeneration
 		{
 			int width = UnityEngine.Random.Range (minHouseWidth, maxHouseWidth);
 			int height = UnityEngine.Random.Range (minHouseHeight, maxHouseHeight) + 1; //+1 for roof
-			Point<int> point = GetPointForHouse (main, width, height);
+			Point<int> point = main.Tiles.GetFreeRandomPoint (width, height, MaxInvisibleHorizontal, MaxInvisibleVertical, EmptyBorder);
 			if (point == null) {
 				Debug.Log("Cannot find place for house ("  + width + ", " + height +")");
 				return null;
@@ -67,7 +67,7 @@ namespace LocationGeneration
 				shadow.GetComponent<TiledSprite> ()
 					.SetTiles (width, 1)
 					.SetTileSize (main.TileSize, main.TileSize)
-					.SetSortOrder (sortOrder);
+					.SetSortOrder (sortOrder + 1);
 				shadow.transform.SetParent (house.transform, true);
 				shadow.transform.localPosition = new Vector3 (0, (height - 2) * main.TileSize, 0);
 
@@ -75,7 +75,7 @@ namespace LocationGeneration
 				grass.GetComponent<TiledSprite> ()
 					.SetTiles (width, 1)
 					.SetTileSize (main.TileSize, main.TileSize)
-					.SetSortOrder (sortOrder);
+					.SetSortOrder (sortOrder + 1);
 				grass.transform.SetParent (house.transform, true);
 			}
 
@@ -83,19 +83,5 @@ namespace LocationGeneration
 			house.transform.localPosition = new Vector3 (point.x * main.TileSize, point.y * main.TileSize);
 			return house;
 		}
-
-		private Point<int> GetPointForHouse (Main main, int width, int height)
-		{
-			List<Point<int>> availablePoints = new List<Point<int>> ();
-			for (int x = Mathf.Max(-MaxInvisibleHorizontal, 1 - width); x < main.Tiles.Width + 1 - Mathf.Max(1, width - MaxInvisibleHorizontal); x++) {
-				for (int y = Mathf.Max(-MaxInvisibleVertical, 1 - height); y < main.Tiles.Height + 1 - Mathf.Max(1, height - MaxInvisibleVertical); y++) {
-					if (main.Tiles.IsEmptyRect (x - EmptyBorder, y - EmptyBorder, width + EmptyBorder * 2, height + EmptyBorder * 2, true)) {
-						availablePoints.Add (new Point<int> (x, y));
-					}
-				}
-			}
-			return availablePoints.Count > 0 ? availablePoints [UnityEngine.Random.Range (0, availablePoints.Count)] : null;
-		}
-
 	}
 }

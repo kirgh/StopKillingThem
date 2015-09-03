@@ -21,6 +21,19 @@ public class LocationTiles
 		}
 	}
 
+	public LocationTiles (LocationTiles other)
+	{
+		this.Width = other.Width;
+		this.Height = other.Height;
+		for (int i = 0; i < Width; i++) {
+			tiles[i] = new Dictionary<int, TileType>();
+			for (int j = 0; j < Height; j++) {
+				tiles[i][j] = other.tiles[i][j];
+			}
+		}
+	}
+
+
 	public void Set(int x, int y, TileType tile)
 	{
 		if (!Contains (x, y)) {
@@ -71,5 +84,26 @@ public class LocationTiles
 		}
 		return true;
 	}
+
+	private List<Point<int>> GetFreePoints (int width, int height, int maxInvisibleHorizontal, int maxInvisibleVertical, int emptyBorder)
+	{
+		List<Point<int>> availablePoints = new List<Point<int>> ();
+		for (int x = Mathf.Max(-maxInvisibleHorizontal, 1 - width); x < this.Width + 1 - Mathf.Max(1, width - maxInvisibleHorizontal); x++) {
+			for (int y = Mathf.Max(-maxInvisibleVertical, 1 - height); y < this.Height + 1 - Mathf.Max(1, height - maxInvisibleVertical); y++) {
+				if (IsEmptyRect (x - emptyBorder, y - emptyBorder, width + emptyBorder * 2, height + emptyBorder * 2, true)) {
+					availablePoints.Add (new Point<int> (x, y));
+				}
+			}
+		}
+		return availablePoints;
+	}
+
+	public Point<int> GetFreeRandomPoint (int width, int height, int maxInvisibleHorizontal, int maxInvisibleVertical, int emptyBorder){
+		List<Point<int>> availablePoints = GetFreePoints (width, height, maxInvisibleHorizontal, maxInvisibleVertical, emptyBorder);
+		return availablePoints.Count > 0 ? availablePoints [UnityEngine.Random.Range (0, availablePoints.Count)] : null;
+	}
+
+
+
 
 }
