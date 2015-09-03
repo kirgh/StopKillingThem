@@ -7,6 +7,7 @@ public class TiledSprite : MonoBehaviour {
 	private int height;
 	private float tileWidth;
 	private float tileHeight;
+	private int sortOrder;
 	private bool dirty;
 	private TiledSpriteSettings tileSet;
 
@@ -39,6 +40,13 @@ public class TiledSprite : MonoBehaviour {
 		return this;
 	}
 
+	public TiledSprite SetSortOrder(int order)
+	{
+		sortOrder = order;
+		dirty = true;
+		return this;
+	}
+	
 	void Update()
 	{
 		if (!dirty) {
@@ -66,11 +74,12 @@ public class TiledSprite : MonoBehaviour {
 		Vector3 spriteScale = new Vector3 (tileWidth / spriteWidth, tileHeight / spriteHeight, 1);
 
 		for (int x = 0; x < width; x++) {
-			for(int y = 0; y < width; y++){
+			for(int y = 0; y < height; y++){
 				GameObject child = new GameObject();
 				child.AddComponent<SpriteRenderer>().sprite = sprites[UnityEngine.Random.Range(0, tileSet.TileNames.Count)];
 				child.transform.SetParent(thisTransform, false);
 				child.transform.localScale = spriteScale;
+				child.GetComponent<SpriteRenderer>().sortingOrder = sortOrder;
 				if(tileSet.AllowRandomRotation){
 					child.transform.Rotate(0, 0, 90 * UnityEngine.Random.Range(0, 4));
 				}

@@ -30,9 +30,9 @@ public class CameraController : MonoBehaviour {
 	}
 
    	private void Clamp (){
-		mainCamera.transform.position = new Vector3 (main.LocationWidth / 2, main.LocationHeight / 2, CameraZ);
+		mainCamera.transform.position = new Vector3 (main.LocationWidthInMeters / 2, main.LocationHeightInMeters / 2, CameraZ);
 		float screenAspect = (float)Screen.width / Screen.height;
-		mainCamera.orthographicSize = 0.5f * Mathf.Max (main.LocationWidth / screenAspect, main.LocationHeight);
+		mainCamera.orthographicSize = 0.5f * Mathf.Max (main.LocationWidthInMeters / screenAspect, main.LocationHeightInMeters);
 	}
 
 }
