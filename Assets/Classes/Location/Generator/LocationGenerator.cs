@@ -16,7 +16,7 @@ public class LocationGenerator : MonoBehaviour {
 		Main main = GetComponent<Main> ();
 
 		new GrassGenerator ().CreateGrass (main);
-		new RoadGenerator(1,3, 1, 3).CreateRoads(main);
+		new RoadGenerator(1,5, 1, 3).CreateRoads(main);
 
 		//Houses
 		//Trees, statues, etc

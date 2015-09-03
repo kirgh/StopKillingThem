@@ -12,7 +12,7 @@ public class Main : MonoBehaviour {
 
 	void Start () {
 		TileSize = 2;
-		Tiles = new LocationTiles (15, 10);
+		Tiles = new LocationTiles (12, 10);
 		LocationWidthInMeters = Tiles.Width * TileSize;
 		LocationHeightInMeters = Tiles.Height * TileSize;
 		gameObject.AddComponent<LocationGenerator> ();
