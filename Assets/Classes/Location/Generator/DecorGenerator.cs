@@ -4,23 +4,12 @@ using UnityEngine;
 
 namespace LocationGeneration
 {
-	public class DecorGenerator
+	public class DecorGenerator : MonoBehaviour
 	{
 
-		static DecorGenerator(){
-			SpriteNames = new List<string> ();
-			SpriteNames.Add ("Sprites/Textures/tree_01");
-			SpriteNames.Add ("Sprites/Textures/statue_01");
-		}
-
-		private static readonly List<string> SpriteNames;
-
+		public Sprite[] Sprites;
 		public int minCount;
 		public int maxCount;
-
-		public DecorGenerator ()
-		{
-		}
 
 		public void CreateDecor(Main main)
 		{
@@ -35,11 +24,10 @@ namespace LocationGeneration
 					break;
 				}
 
-				string spriteName = SpriteNames[UnityEngine.Random.Range(0, SpriteNames.Count)];
-				GameObject decor = new GameObject("Decor " + spriteName);
+				Sprite sprite = Sprites[UnityEngine.Random.Range(0, Sprites.Length)];
+				GameObject decor = new GameObject("Decor " + sprite.name);
 
 				float scale = main.SourceGraphicsScale;
-				Sprite sprite = Resources.Load<Sprite>(spriteName);
 				decor.AddComponent<SpriteRenderer>().sprite = sprite;
 				decor.transform.SetParent(parent.transform, true);
 				decor.transform.localScale = new Vector3(scale* (UnityEngine.Random.value > 0.5f ? 1 : -1), scale, 1);

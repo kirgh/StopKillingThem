@@ -5,13 +5,11 @@ public class CameraController : MonoBehaviour {
 
 	private static readonly float CameraZ = -10;
 
-	private Camera mainCamera;
-	private Main main;
+	public Camera mainCamera;
+	public Main main;
 	private bool dirty;
 
 	void Start () {
-		main = GetComponent<Main> ();
-		mainCamera = Camera.main;
 		gameObject.AddComponent<ScreenResizeCapturer> ().ScreenResizeEvent += OnScreenResized;
 		Clamp ();
 	}

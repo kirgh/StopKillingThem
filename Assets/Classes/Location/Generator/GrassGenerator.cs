@@ -1,20 +1,17 @@
 using System;
 using UnityEngine;
 
-namespace LocationGeneration{
-public class GrassGenerator
+namespace LocationGeneration
 {
-	public GrassGenerator ()
+	public class GrassGenerator : MonoBehaviour
 	{
-	}
 
-	public GameObject CreateGrass(Main main)
-	{
-		GameObject grass = TiledSprite.Create (
-			TiledSpriteSettings.CreateWithTile("Sprites/Textures/grass_01", true)
-			);
+		public TiledSpriteSettings tiles;
 
-		grass.name = "Grass";
+		public GameObject CreateGrass (Main main)
+		{
+			GameObject grass = TiledSprite.Create (tiles);
+			grass.name = "Grass";
 
 		grass.GetComponent<TiledSprite> ()
 			.SetTiles (main.Tiles.Width, main.Tiles.Height)
@@ -22,7 +19,7 @@ public class GrassGenerator
 			.SetSortOrder(LocationSortOrders.Grass)
 			.ForceUpdate ();
 
-		return grass;
+			return grass;
+		}
 	}
-}
 }

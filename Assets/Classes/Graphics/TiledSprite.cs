@@ -63,12 +63,8 @@ public class TiledSprite : MonoBehaviour {
 			Destroy(thisTransform.GetChild(i).gameObject);
 		}
 
-		List<Sprite> sprites = new List<Sprite> ();
-		foreach (string tileName in tileSet.TileNames) {
-			sprites.Add(Resources.Load<Sprite> (tileName));
-		}
-		float spriteWidth = sprites[0].bounds.size.x;
-		float spriteHeight = sprites[0].bounds.size.y;
+		float spriteWidth = tileSet.Sprites[0].bounds.size.x;
+		float spriteHeight = tileSet.Sprites[0].bounds.size.y;
 		float tileWidth = this.tileWidth == 0 ? spriteWidth : this.tileWidth;
 		float tileHeight = this.tileHeight == 0 ? spriteHeight : this.tileHeight;
 		Vector3 spriteScale = new Vector3 (tileWidth / spriteWidth, tileHeight / spriteHeight, 1);
@@ -76,7 +72,7 @@ public class TiledSprite : MonoBehaviour {
 		for (int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++){
 				GameObject child = new GameObject();
-				child.AddComponent<SpriteRenderer>().sprite = sprites[UnityEngine.Random.Range(0, tileSet.TileNames.Count)];
+				child.AddComponent<SpriteRenderer>().sprite = tileSet.Sprites[UnityEngine.Random.Range(0, tileSet.Sprites.Length)];
 				child.transform.SetParent(thisTransform, false);
 				child.transform.localScale = spriteScale;
 				child.GetComponent<SpriteRenderer>().sortingOrder = sortOrder;

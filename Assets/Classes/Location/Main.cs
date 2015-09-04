@@ -9,17 +9,18 @@ public class Main : MonoBehaviour {
 	public float SourceGraphicsScale{ private set; get; }
 	public LocationTiles Tiles{ private set; get; }
 	
-
-
-	void Start ()
+	void Awake ()
 	{
 		TileSize = 2;
 		SourceGraphicsScale = TileSize / 0.4f;
 		Tiles = new LocationTiles (UnityEngine.Random.Range(7, 12), UnityEngine.Random.Range(5, 10));
 		LocationWidthInMeters = Tiles.Width * TileSize;
 		LocationHeightInMeters = Tiles.Height * TileSize;
-		gameObject.AddComponent<LocationGeneration.LocationGenerator> ();
-		gameObject.AddComponent<CameraController> ();
+	}
+
+	void Start()
+	{
+		GetComponent<LocationGeneration.LocationGenerator> ().Generate ();
 	}
 
 	public void Restart()
