@@ -14,7 +14,7 @@ namespace LocationGeneration
 		public GameObject CreateDecor(Main main)
 		{
 			GameObject parent = new GameObject ("Decor");
-			int count = UnityEngine.Random.Range(minCount, maxCount);
+			int count = UnityEngine.Random.Range(minCount, maxCount + 1);
 			LocationTiles tempTiles = new LocationTiles (main.Tiles);
 
 			for (int i = 0; i < count; i++) {

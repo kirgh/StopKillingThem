@@ -26,7 +26,7 @@ namespace LocationGeneration
 		public GameObject CreateHouses (Main main)
 		{
 			GameObject houses = new GameObject ("Houses");
-			int housesCount = UnityEngine.Random.Range (minHousesCount, maxHousesCount);
+			int housesCount = UnityEngine.Random.Range (minHousesCount, maxHousesCount + 1);
 			for (int i = 0; i < housesCount; i++) {
 				GameObject house = TryGenerateHouse (main);
 				if (house != null) {

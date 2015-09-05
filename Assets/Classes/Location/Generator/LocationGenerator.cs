@@ -13,6 +13,7 @@ namespace LocationGeneration
 			GetComponent<RoadGenerator> ().CreateRoads (main).transform.SetParent(location.transform, true);
 			GetComponent<HousesGenerator> ().CreateHouses (main).transform.SetParent(location.transform, true);
 			GetComponent<DecorGenerator> ().CreateDecor (main).transform.SetParent(location.transform, true);
+			GetComponent<CharacterGenerator> ().CreateCharacters (main).transform.SetParent(location.transform, true);
 		}
 	}
 }

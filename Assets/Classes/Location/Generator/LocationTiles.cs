@@ -8,6 +8,7 @@ public class LocationTiles
 	public int Width{ private set; get; }
 	public int Height{ private set; get; }
 
+	public delegate bool TileCheckDelegate (TileType type);
 
 	public LocationTiles (int width, int height)
 	{
@@ -103,6 +104,18 @@ public class LocationTiles
 		return availablePoints.Count > 0 ? availablePoints [UnityEngine.Random.Range (0, availablePoints.Count)] : null;
 	}
 
+	public Point<int> GetRandomTile (TileCheckDelegate checkDelegate)
+	{
+		List<Point<int>> availablePoints = new List<Point<int>> ();
+		for(int x = 0; x < Width; x++){
+			for(int y = 0; y < Height; y++){
+				if(checkDelegate(tiles[x][y])){
+					availablePoints.Add(new Point<int>(x, y));
+				}
+			}
+		}
+		return availablePoints.Count > 0 ? availablePoints [UnityEngine.Random.Range (0, availablePoints.Count)] : null;
+	}
 
 
 

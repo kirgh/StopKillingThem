@@ -18,7 +18,7 @@ namespace LocationGeneration
 		public GameObject CreateRoads (Main main)
 		{
 			GameObject roads = new GameObject ("Roads");
-			int roadsCount = UnityEngine.Random.Range (minRoadsCount, maxRoadsCount);
+			int roadsCount = UnityEngine.Random.Range (minRoadsCount, maxRoadsCount + 1);
 			for (int i = 0; i < roadsCount; i++) {
 				int roadWidth = UnityEngine.Random.Range (minRoadWidth, maxRoadWidth);
 				bool vertical = UnityEngine.Random.value > 0.5f;
