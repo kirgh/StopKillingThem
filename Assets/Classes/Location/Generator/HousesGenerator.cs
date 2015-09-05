@@ -7,10 +7,6 @@ namespace LocationGeneration
 	public class HousesGenerator : MonoBehaviour
 	{
 
-		private static readonly int MaxInvisibleVertical = 1;
-		private static readonly int MaxInvisibleHorizontal = 1;
-		private static readonly int EmptyBorder = 1;
-
 		public TiledSpriteSettings wallTiles;
 		public TiledSpriteSettings roofTiles;
 		public TiledSpriteSettings shadowTiles;
@@ -22,6 +18,10 @@ namespace LocationGeneration
 		public int maxHouseWidth;
 		public int minHouseHeight;
 		public int maxHouseHeight;
+		public int maxInvisibleVertical = 0;
+		public int maxInvisibleHorizontal = 0;
+		public int emptyBorder = 1;
+		
 
 		public GameObject CreateHouses (Main main)
 		{
@@ -40,7 +40,7 @@ namespace LocationGeneration
 		{
 			int width = UnityEngine.Random.Range (minHouseWidth, maxHouseWidth);
 			int height = UnityEngine.Random.Range (minHouseHeight, maxHouseHeight) + 1; //+1 for roof
-			Point<int> point = main.Tiles.GetFreeRandomPoint (width, height, MaxInvisibleHorizontal, MaxInvisibleVertical, EmptyBorder);
+			Point<int> point = main.Tiles.GetFreeRandomPoint (width, height, maxInvisibleHorizontal, maxInvisibleVertical, emptyBorder);
 			if (point == null) {
 				Debug.Log("Cannot find place for house ("  + width + ", " + height +")");
 				return null;
