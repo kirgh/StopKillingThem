@@ -15,7 +15,7 @@ namespace LocationGeneration
 		public int minRoadWidth;
 		public int maxRoadWidth;
 
-		public void CreateRoads (Main main)
+		public GameObject CreateRoads (Main main)
 		{
 			GameObject roads = new GameObject ("Roads");
 			int roadsCount = UnityEngine.Random.Range (minRoadsCount, maxRoadsCount);
@@ -43,7 +43,9 @@ namespace LocationGeneration
 				main.Tiles.SetRect (minX, minY, maxX - minX, maxY - minY, TileType.Road, false);
 			}
 
-			CreateGrassToRoadBorders (main);
+			GameObject grassToRoads = CreateGrassToRoadBorders (main);
+			grassToRoads.transform.SetParent (roads.transform, true);
+			return roads;
 		}
 
 		private GameObject CreateRoad (int startX, int startY, int roadWidth, bool vertical, Main main)
@@ -104,7 +106,7 @@ namespace LocationGeneration
 			public bool shouldBeRoad;
 		}
 
-		private void CreateGrassToRoadBorders (Main main)
+		private GameObject CreateGrassToRoadBorders (Main main)
 		{
 			GameObject grassToRoadsBorders = new GameObject ("GrassToRoadsBorders");
 			Transform parentTransform = grassToRoadsBorders.transform;
@@ -142,6 +144,7 @@ namespace LocationGeneration
 					}
 				}
 			}
+			return grassToRoadsBorders;
 		}
 	}
 }

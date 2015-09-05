@@ -8,10 +8,11 @@ namespace LocationGeneration
 		public void Generate ()
 		{
 			Main main = GetComponent<Main> ();
-			GetComponent<GrassGenerator> ().CreateGrass (main);
-			GetComponent<RoadGenerator> ().CreateRoads (main);
-			GetComponent<HousesGenerator> ().CreateHouses (main);
-			GetComponent<DecorGenerator> ().CreateDecor (main);
+			GameObject location = new GameObject ("Location");
+			GetComponent<GrassGenerator> ().CreateGrass (main).transform.SetParent(location.transform, true);
+			GetComponent<RoadGenerator> ().CreateRoads (main).transform.SetParent(location.transform, true);
+			GetComponent<HousesGenerator> ().CreateHouses (main).transform.SetParent(location.transform, true);
+			GetComponent<DecorGenerator> ().CreateDecor (main).transform.SetParent(location.transform, true);
 		}
 	}
 }

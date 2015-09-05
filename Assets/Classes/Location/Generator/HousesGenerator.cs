@@ -23,7 +23,7 @@ namespace LocationGeneration
 		public int minHouseHeight;
 		public int maxHouseHeight;
 
-		public void CreateHouses (Main main)
+		public GameObject CreateHouses (Main main)
 		{
 			GameObject houses = new GameObject ("Houses");
 			int housesCount = UnityEngine.Random.Range (minHousesCount, maxHousesCount);
@@ -33,6 +33,7 @@ namespace LocationGeneration
 					house.transform.SetParent (houses.transform, true);
 				}
 			}
+			return houses;
 		}
 
 		private GameObject TryGenerateHouse (Main main)

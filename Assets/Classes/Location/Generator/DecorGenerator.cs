@@ -11,7 +11,7 @@ namespace LocationGeneration
 		public int minCount;
 		public int maxCount;
 
-		public void CreateDecor(Main main)
+		public GameObject CreateDecor(Main main)
 		{
 			GameObject parent = new GameObject ("Decor");
 			int count = UnityEngine.Random.Range(minCount, maxCount);
@@ -35,8 +35,8 @@ namespace LocationGeneration
 				decor.GetComponent<SpriteRenderer>().sortingOrder = LocationSortOrders.GetLocationObjectSortOrder(point.y * main.TileSize + main.TileSize / 2);
 				tempTiles.Set(point.x, point.y, TileType.Forbidden);
 			}
+			return parent;
 		}
-
 	}
 }
 
