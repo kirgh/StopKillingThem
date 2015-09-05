@@ -5,6 +5,9 @@ namespace LocationGeneration
 {
 	public class LocationGenerator : MonoBehaviour
 	{
+
+		public GameObject Rain;
+
 		public void Generate ()
 		{
 			Main main = GetComponent<Main> ();
@@ -14,6 +17,10 @@ namespace LocationGeneration
 			GetComponent<HousesGenerator> ().CreateHouses (main).transform.SetParent(location.transform, true);
 			GetComponent<DecorGenerator> ().CreateDecor (main).transform.SetParent(location.transform, true);
 			GetComponent<CharacterGenerator> ().CreateCharacters (main).transform.SetParent(location.transform, true);
+
+			GameObject rain = Instantiate (Rain);
+			rain.GetComponent<Rain> ().Init (main);
+			rain.transform.SetParent (location.transform, true);
 		}
 	}
 }
